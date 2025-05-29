@@ -1,0 +1,27 @@
+<html>
+<body>
+<div style="display: flex; align-items: center; border: blue; border-style:  solid">
+    <form action="/produtos/salvar" method="post">
+<div>
+<div>
+
+    <input type="hidden" name="id" value="{{ prd.id }}">
+    <br/>
+    Nome do Produto:
+    <input type="text" name="nomeproduto" value="{{ prd.nome }}"/>
+</div>
+<div>
+Preço
+<input type="text" name="precos" value="{{ prd.preco }}">
+</div>
+
+<input type="submit" value="salvar" name="button"/>
+</div>
+
+<div>
+
+</div>
+</form>
+</div>
+</body>
+</html>

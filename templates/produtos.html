@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Produtos</title>
+</head>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+
+<body>
+<div style="display: flex; align-items: center; border: blue; border-style:  solid">
+    <form action="/produtos/salvar" method="post">
+        {% if request.args.get('msg') %}
+            <div class="alert alert-success">
+                {{ request.args.get('msg') | safe }}
+            </div>
+        {% endif %}
+
+<div>
+    <input  type="hidden" name="id">
+<div>
+    Nome do Produto:
+    <input type="text" name="nomeproduto" required/>
+</div>
+<div>
+Preço
+<input type="text" name="precos" required>
+</div>
+
+<input type="submit" value="salvar" name="button"/>
+</div>
+
+<div>
+
+</div>
+</form>
+</div>
+
+<div class="table_component" role="region" tabindex="0">
+    <table  style="border-style: solid; margin-top: 20px ">
+        <thead >
+        <tr>
+            <th>Descricao</th>
+            <th>Preço (R$) </th>
+            <th>Excluir</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        {%  for produto in prd %}
+        <tr>
+            <td> {{produto.nome}} </td>
+            <td style="text-align: right"> {{ "R$ {:,.2f}".format(produto.preco).replace(",", "X").replace(".", ",").replace("X", ".")  }} </td>
+            <td> <a href="{{ url_for('produto_deletar', id=produto.id)  }}"> delete </a></td>
+            <td>  <a href="http://127.0.0.1:5000/produtos/editar/{{produto.id}}"> edit </a> </td>
+        </tr>
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>
