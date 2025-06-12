@@ -6,10 +6,20 @@
 </head>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
-
+<script>
+    function chamarNovo(){
+       const  url = "{{ url_for("product_new") }}";
+       window.location.href = url;
+    }
+    function mudaPagina(id){
+       var page =  document.getElementById("page")
+        page.setAttribute("value",id);
+       document.forms[0].submit();
+    }
+</script>
 <body>
 <div style="display: flex; align-items: center; border: blue; border-style:  solid">
-    <form action="/produtos/salvar" method="post">
+    <form action="{{ url_for("produto_lista") }}" method="post">
         {% if request.args.get('msg') %}
             <div class="alert alert-success">
                 {{ request.args.get('msg') | safe }}
@@ -20,14 +30,16 @@
     <input  type="hidden" name="id">
 <div>
     Nome do Produto:
-    <input type="text" name="nomeproduto" required/>
-</div>
-<div>
-Preço
-<input type="text" name="precos" required>
+    <input type="text" name="nomeproduto" value="{{ nome }}"/>
 </div>
 
-<input type="submit" value="salvar" name="button"/>
+</div>
+
+<input type="submit" value="pesquisar" name="button"/>
+ <input type="button" value="Novo" name="button" onclick="chamarNovo()"/>
+    <input type="hidden" name="page" id="page" value="{{ page }}">
+
+
 </div>
 
 <div>
@@ -52,14 +64,21 @@ Preço
             <td> {{produto.nome}} </td>
             <td style="text-align: right"> {{ "R$ {:,.2f}".format(produto.preco).replace(",", "X").replace(".", ",").replace("X", ".")  }} </td>
             <td> <a href="{{ url_for('produto_deletar', id=produto.id)  }}"> delete </a></td>
-            <td>  <a href="http://127.0.0.1:5000/produtos/editar/{{produto.id}}"> edit </a> </td>
+            <td>  <a href="{{ url_for('edit', id=produto.id)  }}"> edit </a> </td>
         </tr>
         {% endfor %}
 
 
         </tbody>
     </table>
+<div class="table_component" style="border-style: solid; width: 1024px; height: 50px" >
+    {%
+            for x in range(1,nPages)
+            %}
+       <a href="#" onclick="mudaPagina({{ x }})">{{ x }}</a>
+    {% endfor %}
 
+</div>
 </div>
 </body>
 </html>

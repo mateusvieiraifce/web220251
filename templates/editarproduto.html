@@ -12,7 +12,7 @@
 </div>
 <div>
 Preço
-<input type="text" name="precos" value="{{ prd.preco }}">
+<input style="text-align: right" type="text" name="precos" value="{{ "{:,.2f}".format(prd.preco).replace(",", "X").replace(".", ",").replace("X", ".") }}">
 </div>
 
 <input type="submit" value="salvar" name="button"/>

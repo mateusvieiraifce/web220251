@@ -1,3 +1,5 @@
+
+
 from sqlalchemy import Column, Integer, String, Float
 
 from models.Conexao import Base, engine
