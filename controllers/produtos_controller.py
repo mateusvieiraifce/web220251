@@ -21,7 +21,7 @@ def produto_novo():
     return render_template("produtos.html",prd=produtos, page=page, nPages=nPages)
 
 @app.route('/', methods=['GET'])
-def hello_world():  # put application's code here
+def index():  # put application's code here
     return render_template("index.html")
 
 # exemplo de uma rota que devolve um pagina de um template.
