@@ -22,7 +22,7 @@ def produto_novo():
 
 @app.route('/', methods=['GET'])
 def hello_world():  # put application's code here
-    return 'Hello World!'
+    return render_template("index.html")
 
 # exemplo de uma rota que devolve um pagina de um template.
 @app.route('/pagina', methods=['GET'])

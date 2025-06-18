@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Cadastro de Produtos</title>
-</head>
+{% extends "layout.html" %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}" xmlns="http://www.w3.org/1999/html">
+{% block script %}
 <script>
     function chamarNovo(){
        const  url = "{{ url_for("product_new") }}";
@@ -17,8 +13,13 @@
        document.forms[0].submit();
     }
 </script>
+{% endblock %}
+
 <body>
-<div style="display: flex; align-items: center; border: blue; border-style:  solid">
+
+ {% block pesquisa %}
+<div style="display: flex; align-items: center; border: blue; ">
+
     <form action="{{ url_for("produto_lista") }}" method="post">
         {% if request.args.get('msg') %}
             <div class="alert alert-success">
@@ -39,16 +40,11 @@
  <input type="button" value="Novo" name="button" onclick="chamarNovo()"/>
     <input type="hidden" name="page" id="page" value="{{ page }}">
 
-
-</div>
-
-<div>
-
-</div>
 </form>
 </div>
-
-<div class="table_component" role="region" tabindex="0">
+ {% endblock %}
+     <div class="table_component" role="region" tabindex="0">
+         {% block resultado %}
     <table  style="border-style: solid; margin-top: 20px ">
         <thead >
         <tr>
@@ -71,14 +67,14 @@
 
         </tbody>
     </table>
-<div class="table_component" style="border-style: solid; width: 1024px; height: 50px" >
     {%
             for x in range(1,nPages)
             %}
        <a href="#" onclick="mudaPagina({{ x }})">{{ x }}</a>
     {% endfor %}
+         </table>
 
+         {% endblock %}
 </div>
-</div>
-</body>
-</html>
+
+

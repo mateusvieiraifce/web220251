@@ -5,6 +5,8 @@ from models.Conexao import Base
 app = Flask(__name__)
 
 from controllers.produtos_controller import  *
+from controllers.servicos_controller import *
+from controllers.users_controller import  *
 
 
 if __name__ == '__main__':

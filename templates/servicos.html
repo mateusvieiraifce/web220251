@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+
+{% block pesquisa %}
+<div>
+    <label for="pesquisar">Digite o servico</label>
+    <input type="Text" name="servicoNome"><input type="submit" value="pesquisar" name="button"/>
+    <input type="button" value="Novo" name="button" onclick="chamarNovo()"/>
+</div>
+{% endblock %}
+
+{% block resultado %}
+<table  style="border-style: solid; margin-top: 20px ">
+        <thead >
+        <tr>
+            <th>Descricao</th>
+            <th>Preço (R$) </th>
+            <th>Excluir</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+</table>
+{% endblock %}

@@ -1,5 +1,7 @@
-<html>
-<body>
+{% extends "layout.html" %}
+
+{% block pesquisa %}
+
 <div style="display: flex; align-items: center; border: blue; border-style:  solid">
     <form action="/produtos/salvar" method="post">
 <div>
@@ -23,5 +25,5 @@ Preço
 </div>
 </form>
 </div>
-</body>
-</html>
+{% endblock %}
+

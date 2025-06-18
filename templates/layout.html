@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> PetShop IFCE  {% block title %} TESTE {% endblock %}</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+{% block script %}
+
+{% endblock %}
+<body>
+
+<div class="menu-lateral" style="" >
+    <ul>
+        <li><a href="{{url_for("produto_novo")}}">Produtos</a> </li>
+        <li><a href="#">Clientes</a> </li>
+        <li><a href="{{url_for("servicos_list")}}">Servicos</a> </li>
+        <li><a href="{{url_for("usuarios_list")}}">Usuários</a> </li>
+        <li><a href="#">Tipo Produto</a> </li>
+        <li><a href="#">Vendas</a> </li>
+    </ul>
+
+</div>
+<div class="conteudo-principal">
+
+    <div style="display: flex; align-items: center; border: blue; ">
+    {% block pesquisa %}
+    {% endblock %}
+    </div>
+ <div class="table_component" role="region" tabindex="0">
+     {% block resultado %}
+    {% endblock %}
+ </div>
+
+
+</div>
+
+</body>
+</html>
