@@ -4,12 +4,14 @@ from sqlalchemy.orm import sessionmaker
 
 from models.Conexao import engine
 from models.produto_model import Produto
+from flask_login import login_required
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # exemplo de uma rota devolvendo apenas um texto.
 
 @app.route('/produtos', methods=['GET'])
+@login_required
 def produto_novo():
     perPage =5
     page = request.args.get('page', 1, type=int)

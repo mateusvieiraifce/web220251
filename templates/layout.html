@@ -19,6 +19,7 @@
         <li><a href="{{url_for("usuarios_list")}}">Usuários</a> </li>
         <li><a href="#">Tipo Produto</a> </li>
         <li><a href="#">Vendas</a> </li>
+        <li><a href="{{url_for('logout')}}">Sair</a> </li>
 
     </ul>
 
@@ -27,6 +28,8 @@
 
     <div style="display: flex; align-items: center; border: blue; ">
     {% block pesquisa %}
+
+    
     {% endblock %}
     </div>
  <div class="table_component" role="region" tabindex="0">
@@ -37,5 +40,23 @@
 
 </div>
 
+<script>
+  // Aguarda a página carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    const alert = document.getElementById('successAlert');
+    
+    setTimeout(() => {
+      if (alert) {
+        alert.style.opacity = '0';
+        setTimeout(() => {
+          alert.style.display = 'none';
+        }, 500); // Aguarda a transição de 0.5s antes de remover
+      }
+    }, 2000); // 2 segundos antes de desaparecer
+  });
+</script>
+
 </body>
+
+
 </html>

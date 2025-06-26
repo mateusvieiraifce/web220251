@@ -1,0 +1,123 @@
+<html>
+
+   <style>
+      
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Fundo da página */
+body {
+  background:#2c3e50;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container do login */
+.login-container {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Título */
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Estilo dos campos */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 10px 0 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: 0.3s ease;
+}
+
+.login-container input:focus {
+  border-color: #4facfe;
+  outline: none;
+}
+
+/* Botão de login */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: #4facfe;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background: #00c6ff;
+}
+
+/* Texto de rodapé */
+.login-container .footer {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+   </style>
+   
+   <link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}">
+    <body>
+
+          {% if request.args.get('msg') %}
+            <div class="alert alert-success" id="successAlert">
+                {{ request.args.get('msg') | safe }}
+            </div>
+         {% endif %}
+
+        <form action="{{url_for('login')}}" method="post">
+            <div class="login-container">
+            <div>
+            <label>User Name</label>
+            <input type="email" name="username"  required/>
+            </div>
+            <div>
+            <label>Senha</label>
+            <input type="password" name="password" required />
+            </div>
+            <input type="submit" value="Entrar"/>
+              <div class="footer">Esqueceu a senha?</div>
+            </div>
+        </form>
+    </body>
+</html>
+
+<script>
+  // Aguarda a página carregar
+  window.addEventListener('DOMContentLoaded', () => {
+    const alert = document.getElementById('successAlert');
+    
+    setTimeout(() => {
+      if (alert) {
+        alert.style.opacity = '0';
+        setTimeout(() => {
+          alert.style.display = 'none';
+        }, 500); // Aguarda a transição de 0.5s antes de remover
+      }
+    }, 2000); // 2 segundos antes de desaparecer
+  });
+</script>

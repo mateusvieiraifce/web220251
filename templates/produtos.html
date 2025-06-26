@@ -22,7 +22,7 @@
 
     <form action="{{ url_for("produto_lista") }}" method="post">
         {% if request.args.get('msg') %}
-            <div class="alert alert-success">
+            <div class="alert alert-success" id="successAlert">
                 {{ request.args.get('msg') | safe }}
             </div>
         {% endif %}
