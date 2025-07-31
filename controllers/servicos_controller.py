@@ -2,18 +2,21 @@ from main import app
 from flask import render_template, request, jsonify, redirect, url_for
 from sqlalchemy.orm import sessionmaker
 
+from flask_login import login_required
 from models.Conexao import engine
 from models.produto_model import Produto
 from models.servico_model import Servico
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 @app.route('/servicos', methods=['GET'])
+@login_required
 def servicos_list():
     db = SessionLocal()
     servicos = db.query(Servico).all()
     return render_template("servicos.html", servicos=servicos)
 
 @app.route('/servicos/search', methods=['POST'])
+@login_required
 def servicos_searchs():
     db = SessionLocal()
     nome = request.form['servicoNome']
@@ -21,6 +24,7 @@ def servicos_searchs():
     return render_template("servicos.html", servicos=servicos)
 
 @app.route('/servicos/<int:id>', methods=['GET'])
+@login_required
 def servico_delete(id):
     db = SessionLocal()
     db.query(Servico).filter(Servico.id == id).delete()
@@ -29,16 +33,19 @@ def servico_delete(id):
     return redirect(url_for('servicos_list', msg=msgI))
 
 @app.route('/servicos/novo', methods=['GET'])
+@login_required
 def servico_novo():
     return render_template("editarservicos.html",serv=Servico(nome="", preco=0))
 
 @app.route('/servicos/editar/<int:id>', methods=['GET'])
+@login_required
 def servico_editar(id):
     db = SessionLocal()
     serv = db.query(Servico).get(id)
     return render_template("editarservicos.html",serv=serv)
 
 @app.route('/servicos/salvar', methods=['POST'])
+@login_required
 def servico_save():
     db = SessionLocal()
     nome = request.form['servicoNome']
