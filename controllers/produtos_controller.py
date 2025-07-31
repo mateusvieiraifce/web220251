@@ -46,7 +46,6 @@ def produto_salvar():
         if id is "":
             prd = Produto(nome, preco)
             db.add(prd)
-
         else:
             prd = db.query(Produto).get(id)
             prd.nome = nome

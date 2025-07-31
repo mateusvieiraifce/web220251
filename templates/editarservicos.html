@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block pesquisa %}
+
+<div style="display: flex; align-items: center; border: blue; border-style:  solid">
+    <form action="{{ url_for("servico_save") }}" method="post">
+<div>
+<div>
+
+    {% if serv.id %}
+      <input type="hidden" name="id" value="{{ serv.id }}">
+    {% else %}
+     <input type="hidden" name="id" value="">
+    {%endif%}
+
+    <br/>
+    Nome do Serviço:
+    <input type="text" name="servicoNome" value="{{ serv.nome }}"/>
+</div>
+<div>
+Preço
+<input style="text-align: right" type="text" name="preco" value="{{ "{:,.2f}".format(serv.preco).replace(",", "X").replace(".", ",").replace("X", ".") }}">
+</div>
+
+<input type="submit" value="salvar" name="button"/>
+</div>
+
+<div>
+
+</div>
+</form>
+</div>
+{% endblock %}
+

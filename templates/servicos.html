@@ -1,11 +1,30 @@
 {% extends "layout.html" %}
 
+{% block script %}
+<script>
+    function chamarNovo(){
+       const  url = "{{ url_for("servico_novo") }}";
+       window.location.href = url;
+    }
+</script>
+{% endblock %}
+
+
 {% block pesquisa %}
+
+    {% if request.args.get('msg') %}
+            <div class="alert alert-success" id="successAlert">
+                {{ request.args.get('msg') | safe }}
+            </div>
+    {% endif %}
+
+    <form action="{{ url_for('servicos_searchs') }}" method="post">
 <div>
     <label for="pesquisar">Digite o servico</label>
     <input type="Text" name="servicoNome"><input type="submit" value="pesquisar" name="button"/>
     <input type="button" value="Novo" name="button" onclick="chamarNovo()"/>
 </div>
+    </form>
 {% endblock %}
 
 {% block resultado %}
@@ -19,6 +38,16 @@
         </tr>
         </thead>
         <tbody>
+
+        {%  for servico in servicos %}
+        <tr>
+            <td> {{servico.nome}} </td>
+            <td style="text-align: right"> {{ "R$ {:,.2f}".format(servico.preco).replace(",", "X").replace(".", ",").replace("X", ".")  }} </td>
+            <td> <a href="{{ url_for('servico_delete', id=servico.id)  }}"> delete </a></td>
+            <td>  <a href="{{ url_for('servico_editar', id=servico.id)  }}"> edit </a> </td>
+        </tr>
+        {% endfor %}
+
         </tbody>
 </table>
 {% endblock %}
