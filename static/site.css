@@ -84,7 +84,7 @@
            margin-left:200px;
             padding: 20px;
             flex-direction: row;
-            gap:10px
+            gap:10px;
             background-color: #ecf0f1;
 
         }
@@ -135,4 +135,99 @@
 .alert-success::before {
   content: "✔️";
   font-size: 18px;
+}
+
+
+.botao-cadastro {
+    background-color: #28a745;     /* verde sucesso */
+    color: white;                  /* texto branco */
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.botao-cadastro:hover {
+    background-color: #218838;    /* verde escuro no hover */
+    transform: scale(1.03);       /* leve ampliação */
+}
+
+.botao-cadastro:active {
+    background-color: #1e7e34;
+    transform: scale(0.98);       /* clique */
+}
+
+.botao-deletar {
+    background-color: #dc3545;  /* vermelho */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.botao-deletar:hover {
+    background-color: #c82333;
+    transform: scale(1.03);
+}
+
+.botao-deletar:active {
+    background-color: #bd2130;
+    transform: scale(0.95);
+}
+
+
+.botao-editar {
+    background-color: #007bff;  /* azul */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: inline-block;
+}
+
+.botao-editar:hover {
+    background-color: #0069d9;
+    transform: scale(1.03);
+}
+
+.botao-editar:active {
+    background-color: #005cbf;
+    transform: scale(0.95);
+}
+
+
+.botao-pesquisar {
+    background-color: #007bff;      /* azul Bootstrap padrão */
+    color: white;                   /* texto branco */
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.botao-pesquisar:hover {
+    background-color: #0069d9;      /* azul mais escuro no hover */
+    transform: scale(1.03);         /* leve ampliação */
+}
+
+.botao-pesquisar:active {
+    background-color: #005cbf;      /* azul ainda mais escuro ao clicar */
+    transform: scale(0.98);         /* clique */
 }

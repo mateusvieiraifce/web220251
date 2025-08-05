@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block title %} Clientes {% endblock %}
+<link rel="stylesheet" href="{{ url_for('static', filename='site.css') }}" xmlns="http://www.w3.org/1999/html">
+
+
+{% block script %}
+<script>
+    function chamarNovo() {
+        const url = "{{ url_for('cliente_new') }}";
+        window.location.href = url;
+    }
+</script>
+{% endblock %}
+
+<body>
+{% block pesquisa %}
+<div style="display: flex; align-items: center;">
+    <form action="{{ url_for('cliente_lista') }}" method="get">
+        
+        {% if request.args.get('msg') %}
+            <div class="alert alert-success" id="successAlert">
+                {{ request.args.get('msg') | safe }}
+            </div>
+        {% endif %}
+
+        <div>
+            Nome do Cliente:
+            <input type="text" name="nome" value="{{ nome }}">
+            <input class="botao-pesquisar" type="submit" value="Pesquisar">
+            
+        </div>
+        <br>
+        <input class="botao-cadastro" type="button" value="Novo" onclick="chamarNovo()">
+
+        <!-- Campo oculto de controle de página -->
+        <input type="hidden" name="page" id="page" value="{{ page }}">
+    </form>
+</div>
+{% endblock %}
+
+<div class="table_component" role="region" tabindex="0">
+{% block resultado %}
+    <table style="border-style: solid; margin-top: 20px">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Endereço</th>
+                <th>Editar</th>
+                <th>Excluir</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in prd %}
+            <tr>
+                <td>{{ cliente.nome }}</td>
+                <td>{{ cliente.email }}</td>
+                <td>{{ cliente.endereco }}</td>
+                <td><a href="{{ url_for('cliente_edit', id=cliente.id) }}" class="botao-editar">Editar</a></td>
+                <td><a href="{{ url_for('cliente_deletar', id=cliente.id) }}" class="botao-deletar">Deletar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Paginação -->
+    <div style="margin-top: 10px;">
+        {% for x in range(1, nPages + 1) %}
+            {% if x == page %}
+                <strong>{{ x }}</strong>
+            {% else %}
+                <a href="{{ url_for('cliente_lista') }}?page={{ x }}&nome={{ nome }}">{{ x }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
+</div>
