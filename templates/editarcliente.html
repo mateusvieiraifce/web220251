@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block title %} Clientes {% endblock %}
+{% block pesquisa %}
+
+<div style="display: flex; align-items: center; border: blue; border-style:  solid">
+    <form action="/clientes/salvar" method="post">
+<div>
+<div>
+
+    <input type="hidden" name="id" value="{{ prd.id }}">
+    <br/>
+    Nome do Cliente:
+    <input type="text" name="nomecliente" value="{{ prd.nome }}"/>
+    <br>
+    Email do Cliente:
+    <input type="text" name="emailcliente" value="{{ prd.email }}"/>
+    <br>
+    Endereço do Cliente:
+    <input type="text" name="enderecocliente" value="{{ prd.endereco }}"/>
+</div>
+
+
+<input class="botao-cadastro" type="submit" value="Salvar" name="button"/>
+</div>
+
+<div>
+
+</div>
+</form>
+</div>
+{% endblock %}
+
