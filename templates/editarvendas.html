@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {% if venda.id %}Editar Venda{% else %}Novo:{% endif %}
+{% endblock %}
+
+{% block pesquisa %}
+    <h1>{% if venda.id %}Editar Venda{% else %}Novo:{% endif %}</h1>
+{% endblock %}
+
+{% block resultado %}
+
+<script>
+    function callBackForPrice(id){
+        var elementoSelecionado = document.getElementById("idProduto").value;
+        console.log(elementoSelecionado)
+
+// Seleciona o input onde o resultado será colocado
+const inputResultado = document.getElementById('total');
+const url =  "/vendas/produto/"+elementoSelecionado;
+
+if (elementoSelecionado!="") {
+// Faz a requisição GET
+fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Erro na requisição');
+    }
+    return response.text(); // ou response.text() se não for JSON
+  })
+  .then(data => {
+    // Define o valor do input com os dados recebidos
+    // Se for JSON, você pode precisar acessar uma propriedade específica
+    console.log((data));
+    inputResultado.value =  data;
+  })
+  .catch(error => {
+    console.error('Erro:', error);
+    //inputResultado.value = 'Erro ao carregar dados';
+  });
+
+} else{
+    inputResultado.value="";
+}
+    }
+</script>
+
+    <form action="{{ url_for('venda_save') }}" method="post">
+        <input type="hidden" name="id" value="{{ venda.id or '' }}">
+
+        <div class="form-group">
+            <label for="clienteNome">Nome do Cliente:</label>
+            <input type="text" id="clienteNome" name="clienteNome" value="{{ venda.cliente_nome or '' }}" required>
+        </div>
+        <br>
+
+        <div class="form-group">
+            <label for="produto">Nome do Produto:</label>
+            <select id="idProduto" name="idProduto" onchange="callBackForPrice(1)">
+                <option value="">Nenhum</option>
+                {%for produto in produtos %}
+                <option value="{{produto.id}}">{{produto.nome}}</option>
+                {%endfor%}
+            </select>
+        
+        </div>
+        <br>
+
+
+        <div class="form-group">
+            <label for="total">Total:</label>
+            <input type="number" id="total" name="total" value="{{ "%.2f"|format(venda.total|float) if venda.total else '0.00' }}" step="0.01" required readonly>
+        </div>
+        <br>
+
+        
+
+
+        <button type="submit">Salvar</button>
+        <a href="{{ url_for('vendas_list') }}" style="margin-left: 10px; text-decoration: none;">
+            <button type="button">Cancelar</button>
+        </a>
+    </form>
+{% endblock %}
