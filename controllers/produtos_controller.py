@@ -162,3 +162,5 @@ def product_update(id):
     produto.nome = data['name']
     db.commit()
     return jsonify(produto.to_dict()), 200
+
+

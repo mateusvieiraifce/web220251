@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}Lista de Vendas{% endblock %}
+
+{% block pesquisa %}
+    <form action="{{ url_for('vendas_search') }}" method="post" style="display: inline-block;">
+        <input type="text" name="clienteNome" placeholder="Buscar pelo nome do produto">
+        <button type="submit">Buscar</button>
+    </form>
+
+    <a href="{{ url_for('venda_novo') }}" style="margin-left: 10px; text-decoration: none;">
+        <button type="button">Novo Produto</button>
+    </a>
+
+    {% if request.args.get('msg') %}
+        <div id="successAlert" style="color: green; margin-top: 10px;">
+            {{ request.args.get('msg') }}
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block resultado %}
+    {% if vendas %}
+        <table border="1" style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Id Da Venda:</th>
+                    <th>Cliente:</th>
+                    <th>Produto:</th>
+                    <th>Total:</th>
+                    <th>Ações:</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venda in vendas %}
+                <tr>
+                    <td>{{ venda.id }}</td>
+                    <td>{{ venda.cliente_nome }}</td>
+                    <td>{{ venda.produto.nome }}</td>
+                    <td>R$ {{ "%.2f"|format(venda.total|float) }}</td>
+                    <td>
+                        <a href="{{ url_for('venda_editar', id=venda.id) }}">Editar</a> |
+                        <a href="{{ url_for('venda_delete', id=venda.id) }}">Excluir</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p style="margin-top: 20px;">Nenhuma venda encontrada.</p>
+    {% endif %}
+{% endblock %}
